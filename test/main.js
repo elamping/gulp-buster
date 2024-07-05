@@ -2,24 +2,24 @@
 
 var bust = require('..');
 var assign = require('object-assign');
-var gutil = require('gulp-util');
+var Vinyl = require('vinyl');
 require('should');
 
 var fileContentStr = 'foo';
 var file2ContentStr = 'bar';
-var file = new gutil.File({
+var file = new Vinyl({
 	cwd: 'C:/users/ult/',
 	base: 'C:/users/ult/test',
 	path: 'C:/users/ult/test/file.js',
 	contents: new Buffer(fileContentStr),
 });
-var file2 = new gutil.File({
+var file2 = new Vinyl({
 	cwd: 'C:/users/ult/',
 	base: 'C:/users/ult/test',
 	path: 'C:/users/ult/test/file2.js',
 	contents: new Buffer(file2ContentStr),
 });
-var fileBinary = new gutil.File({
+var fileBinary = new Vinyl({
 	cwd: 'C:/users/ult/',
 	base: 'C:/users/ult/test',
 	path: 'C:/users/ult/test/file2.js',
@@ -106,7 +106,7 @@ describe('Core', function() {
 	it('should bust two files into the same output file in the same stream', function(done) {
 		var stream = bust();
 		stream.on('data', function(newFile) {
-			newFile.should.be.an.instanceOf(gutil.File);
+			newFile.should.be.an.instanceOf(Vinyl);
 			newFile.should.have.property('path');
 			newFile.should.have.property('relative');
 			newFile.should.have.property('contents');
