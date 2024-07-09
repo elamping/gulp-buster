@@ -2,6 +2,7 @@
 
 var bust = require('..');
 var assign = require('object-assign');
+var PluginError = require('plugin-error');
 var Vinyl = require('vinyl');
 require('should');
 
@@ -41,7 +42,7 @@ beforeEach(bust._reset);
 describe('Configuration-independent internal methods', function() {
 	describe('_error()', function() {
 		it('should return an instance of PluginError', function() {
-			bust._error('err').should.be.an.instanceOf(gutil.PluginError);
+			bust._error('err').should.be.an.instanceOf(PluginError);
 		});
 	});
 
@@ -246,7 +247,7 @@ describe('Configuration options', function() {
 		it('should emit an error when function does not return a string or promise', function(done) {
 			var stream = bust({ algo: function() {} });
 			stream.on('error', function(err) {
-				err.should.be.an.instanceOf(gutil.PluginError);
+				err.should.be.an.instanceOf(PluginError);
 				done();
 			});
 			stream.end(file);
@@ -259,7 +260,7 @@ describe('Configuration options', function() {
 				},
 			});
 			stream.on('error', function(err) {
-				err.should.be.an.instanceOf(gutil.PluginError);
+				err.should.be.an.instanceOf(PluginError);
 				done();
 			});
 			stream.end(file);
@@ -370,7 +371,7 @@ describe('Configuration options', function() {
 		it('should emit an error when function does not return a string or promise', function(done) {
 			var stream = bust({ formatter: function() {} });
 			stream.on('error', function(err) {
-				err.should.be.an.instanceOf(gutil.PluginError);
+				err.should.be.an.instanceOf(PluginError);
 				done();
 			});
 			stream.end(file);
@@ -383,7 +384,7 @@ describe('Configuration options', function() {
 				},
 			});
 			stream.on('error', function(err) {
-				err.should.be.an.instanceOf(gutil.PluginError);
+				err.should.be.an.instanceOf(PluginError);
 				done();
 			});
 			stream.end(file);
